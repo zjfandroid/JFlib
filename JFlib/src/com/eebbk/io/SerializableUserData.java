@@ -2,6 +2,12 @@ package com.eebbk.io;
 
 import android.content.Context;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -86,4 +92,84 @@ public class SerializableUserData{
         }
         return true;
     }
+    
+	/**
+	 * 将一个对象序列化成二进制数组
+	 */
+    public static byte[] SerializeToByte(Object obj)
+    {
+    	ByteArrayOutputStream baos = new ByteArrayOutputStream(); //构造一个字节输出流
+    	byte[] buf = null;
+    	
+    	try {
+    		ObjectOutputStream oos = new ObjectOutputStream(baos); //构造一个类输出流
+    		oos.writeObject(obj);
+    		buf = baos.toByteArray(); //从这个地层字节流中把传输的数组给一个新的数组
+    		
+    		oos.flush();
+    		oos.close();
+    		baos.close();
+    	} catch (IOException e1) {
+    		e1.printStackTrace();
+    	}
+    	
+    	return buf;
+    }
+
+    /**
+     * 将一个二进制数组反序列化
+     */
+    @SuppressWarnings("unchecked")
+	public static <T extends Object> T DeseralizeToArraylist(byte[] buf)
+    {
+    	Object obj = null;
+    	
+        try {
+			//构建一个类输入流，地层用字节输入流实现
+			ByteArrayInputStream bais = new ByteArrayInputStream(buf);
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			obj = ois.readObject(); //读取类
+			
+			ois.close();
+			bais.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return (T)obj;
+    }
+	
+	/** 
+     * 把字节数组保存为一个文件 
+     *  
+     * @param b 
+     * @param outputFile 
+     * @return 
+     */  
+    public static File getFileFromBytes(byte[] b, String outputFile) {  
+        File ret = null;  
+        BufferedOutputStream stream = null;  
+        try {  
+            ret = new File(outputFile);
+            if(!ret.exists()){
+            	ret.createNewFile();
+            }
+            
+            FileOutputStream fstream = new FileOutputStream(ret);  
+            stream = new BufferedOutputStream(fstream);  
+            stream.write(b);  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } finally {  
+            if (stream != null) {  
+                try {  
+                    stream.close();  
+                } catch (IOException e) {  
+                    e.printStackTrace();  
+                }  
+            }  
+        }  
+        return ret;  
+    } 
 }

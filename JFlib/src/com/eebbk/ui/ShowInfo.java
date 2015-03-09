@@ -14,7 +14,7 @@ public class ShowInfo
 	 */
 	public static void printLogW( String aPrintLogStr )
 	{
-		printLogW("VideoClassJunior", aPrintLogStr);
+		printLogW("JFLog", aPrintLogStr);
 	}
 	
 	public static void printLogW(String tag , String aPrintLogStr )

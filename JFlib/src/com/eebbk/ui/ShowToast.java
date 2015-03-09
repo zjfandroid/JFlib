@@ -6,22 +6,22 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 /**
- *	ÏÔÊ¾ToastÌáÊ¾ĞÅÏ¢
+ *  æ˜¾ç¤ºToastæç¤ºä¿¡æ¯
  * @version 1.0
- * @author ÕÅ½¨·å
- * @update 2013-1-18 ÉÏÎç8:42:47
+ * @author å¼ å»ºå³°
+ * @update 2013-1-18 ä¸Šåˆ8:42:47
  */
 public class ShowToast {
 	private static Toast mToast;
 
-	/**
-	 * @param text
-	 *            ÌáÊ¾ÎÄ±¾
-	 * @description ÏÔÊ¾ToastÌáÊ¾ĞÅÏ¢£¬Ò»´ÎÖ»ÏÔÊ¾Ò»¸ö
-	 * @version 1.0
-	 * @author ÕÅ½¨·å
-	 * @update 2012-12-18 ÏÂÎç3:02:19
-	 */
+    /**
+     * @param text
+     *            æç¤ºæ–‡æœ¬
+     * @description æ˜¾ç¤ºToastæç¤ºä¿¡æ¯ï¼Œä¸€æ¬¡åªæ˜¾ç¤ºä¸€ä¸ª
+     * @version 1.0
+     * @author å¼ å»ºå³°
+     * @update 2012-12-18 ä¸‹åˆ3:02:19
+     */
 	public static void show(Context context, String text) {
 		setText(context, text);
 		mToast.setGravity(Gravity.BOTTOM , 0, 80);
